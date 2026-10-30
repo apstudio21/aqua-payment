@@ -200,7 +200,7 @@ h1{font-weight:600;font-size:clamp(2rem,8vw,2.6rem);line-height:1.05;letter-spac
       </div>
       <div class="hint">
         <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" fill="currentColor"/></svg>
-        <span data-t-html="gopayHint">Переказ на номер телефону в застосунку <b>GoPay або Gojek</b>.</span>
+        <span data-t-html="gopayHint">Переказ на цей номер у застосунку <b>GoPay</b> або через GoPay у застосунку <b>Gojek</b> — це той самий гаманець.</span>
       </div>
     </div>
   </section>
@@ -324,7 +324,7 @@ var INVOICE = {
   uahPerUsd: 45.5293,
   uahPerEur: 50.6796,
   uahPerIdr: 0.0025101,
-  gopayPhone: '',          // номер GoPay, напр. '+62 812 0000 0000'
+  gopayPhone: '+380 68 601 0169',   // номер GoPay
   paid: 0,
   items: [
     {
@@ -357,7 +357,7 @@ var T = {
     sumTitle: 'Сума до оплати', total: 'Разом до оплати', paidLbl: 'оплачено', pendingSum: 'суму буде вказано',
     rateNote: 'Сума в рупіях, гривнях і євро — за курсом НБУ станом на {d}.',
     gopaySub: 'Оплата в рупіях (IDR)', gopayPhone: 'Номер телефону GoPay', gopayPending: 'буде додано',
-    sumIdr: 'Сума в рупіях', gopayHint: 'Переказ на номер телефону в застосунку <b>GoPay або Gojek</b>.',
+    sumIdr: 'Сума в рупіях', gopayHint: 'Переказ на цей номер у застосунку <b>GoPay</b> або через GoPay у застосунку <b>Gojek</b> — це той самий гаманець.',
     paypalSub: 'Оплата в доларах (USD)', paypalEmail: 'Email PayPal', sumUsd: 'Сума в доларах',
     uaTitle: 'Українські картки', uaSub: 'Оплата в гривнях', mono: 'Монобанк', privat: 'ПриватБанк',
     recipient: 'Отримувач', nameUa: 'Олександр Порохня', sumUah: 'Сума в гривнях',
@@ -373,7 +373,7 @@ var T = {
     sumTitle: 'Amount due', total: 'Total due', paidLbl: 'paid', pendingSum: 'amount to be added',
     rateNote: 'Amounts in rupiah, hryvnia and euro use the National Bank of Ukraine rate as of {d}.',
     gopaySub: 'Payment in rupiah (IDR)', gopayPhone: 'GoPay phone number', gopayPending: 'will be added',
-    sumIdr: 'Amount in rupiah', gopayHint: 'Transfer to the phone number in the <b>GoPay or Gojek</b> app.',
+    sumIdr: 'Amount in rupiah', gopayHint: 'Transfer to this number in the <b>GoPay</b> app, or via GoPay inside the <b>Gojek</b> app — it is the same wallet.',
     paypalSub: 'Payment in US dollars (USD)', paypalEmail: 'PayPal email', sumUsd: 'Amount in dollars',
     uaTitle: 'Ukrainian cards', uaSub: 'Payment in hryvnia (UAH)', mono: 'Monobank', privat: 'PrivatBank',
     recipient: 'Recipient', nameUa: 'Олександр Порохня', sumUah: 'Amount in hryvnia',
