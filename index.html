@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Оплата робіт | Олександр</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#F4F4F2">
+<meta property="og:title" content="Оплата робіт · Payment">
+<meta property="og:description" content="Сума та реквізити для оплати · Amount and payment details">
+<link rel="icon" href="images/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4F4F2;--card:#FFFFFF;--ink:#17171A;--mut:#6B6B70;--line:#E4E4E0;--line-2:#D6D6D2;
+  --acc:#2F8C92;--acc-soft:#E3F1F1;--ok:#1F8A4C;
+  --f:"Inter Tight",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+*{box-sizing:border-box;margin:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.55 var(--f);overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:6px}
+.wrap{width:min(560px,100% - 32px);margin-inline:auto}
+
+/* header */
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:20px;font-size:13px;color:var(--mut)}
+.brand{display:inline-flex;align-items:center;gap:8px;color:var(--ink);font-weight:600;font-size:15px}
+.brand img{height:22px;width:auto}
+
+/* language switch */
+.lang{position:relative;display:inline-grid;grid-template-columns:1fr 1fr;padding:3px;border-radius:99px;background:#EAEAE6;border:1px solid var(--line)}
+.lang::before{content:"";position:absolute;top:3px;bottom:3px;left:3px;width:calc(50% - 3px);border-radius:99px;background:var(--card);box-shadow:0 1px 3px rgba(0,0,0,.12);transition:transform .3s var(--ease)}
+.lang[data-lang="en"]::before{transform:translateX(100%)}
+.lang button{position:relative;z-index:1;border:0;background:none;cursor:pointer;min-width:44px;height:30px;padding:0 12px;border-radius:99px;font-size:13px;font-weight:600;color:var(--mut);transition:color .2s}
+.lang button[aria-pressed="true"]{color:var(--ink)}
+
+.intro{padding-block:20px 24px}
+.eyebrow{font-size:13px;color:var(--mut);font-weight:500;letter-spacing:.02em;text-transform:uppercase}
+h1{font-weight:600;font-size:clamp(2rem,8vw,2.6rem);line-height:1.05;letter-spacing:-.035em;margin-top:6px}
+
+/* coin */
+.intro{display:flex;align-items:center;gap:18px}
+.intro__txt{min-width:0}
+.intro h1{margin-top:2px}
+.coin{position:relative;flex:none;width:68px;height:68px}
+.coin__face{position:absolute;inset:0;display:grid;place-items:center;border-radius:50%;
+  background:radial-gradient(circle at 32% 28%,#F2FBF5,#D3F0DD 70%);color:#1F8A4C;
+  box-shadow:inset 0 0 0 1px rgba(31,138,76,.18),0 8px 20px -12px rgba(31,138,76,.55)}
+.coin__roll{display:block;width:32px;height:40px;overflow:hidden;-webkit-mask-image:linear-gradient(transparent,#000 25%,#000 75%,transparent);mask-image:linear-gradient(transparent,#000 25%,#000 75%,transparent)}
+.coin__track{display:flex;flex-direction:column;align-items:center;animation:coin-roll 4s cubic-bezier(.65,0,.35,1) infinite}
+.coin__track svg{flex:none;display:block;margin-block:4px}
+.coin__ring{position:absolute;inset:0;border-radius:50%;border:2px solid rgba(31,138,76,.35);animation:coin-ping 3.2s ease-out infinite}
+.coin__ring--2{animation-delay:1.6s}
+@keyframes coin-roll{0%,72%{transform:translateY(0)}100%{transform:translateY(-40px)}}
+@keyframes coin-ping{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.4);opacity:0}}
+
+/* sections */
+.sec{margin-top:28px}
+.intro + .sec{margin-top:4px}
+.sec__title{font-weight:600;font-size:1.25rem;letter-spacing:-.02em;line-height:1.2}
+.sec__sub{font-size:14px;color:var(--mut);margin-top:4px}
+.panel{margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+
+/* amount */
+.amount{padding:20px;border-top:1px solid var(--line);background:#FAFAF8}
+.amount__label{font-size:13px;color:var(--mut)}
+.amount__val{font-weight:600;font-size:3rem;line-height:1;letter-spacing:-.04em;font-variant-numeric:tabular-nums;margin-top:6px}
+.amount__calc{font-size:14px;color:var(--mut);margin-top:8px;font-variant-numeric:tabular-nums}
+.item{display:flex;align-items:flex-start;gap:16px;padding:16px 18px;border-top:1px solid var(--line)}
+.item:first-child{border-top:0}
+.item__txt{flex:1;min-width:0}
+.item__name{font-weight:500;font-size:1.02rem;line-height:1.3}
+.item__desc{font-size:14px;color:var(--mut);margin-top:3px}
+.item__list{list-style:none;padding:0;margin-top:8px;display:grid;gap:5px;font-size:14px;line-height:1.4;color:var(--mut)}
+.item__list li{position:relative;padding-left:14px}
+.item__list li::before{content:"";position:absolute;left:0;top:.65em;width:6px;height:1px;background:var(--acc)}
+.item__sum{flex:none;font-weight:600;font-size:1.15rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.paid{display:inline-flex;align-items:center;gap:5px;height:26px;margin-top:12px;padding:0 10px;border-radius:99px;background:#E3F4EA;color:#1F7A45;border:1px solid rgba(31,138,76,.25);font-size:13px;font-weight:500;white-space:nowrap}
+.fx{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.fx__item{display:inline-flex;align-items:center;height:32px;padding:0 12px;border-radius:99px;background:var(--bg);border:1px solid var(--line);font-size:15px;font-weight:500;font-variant-numeric:tabular-nums;color:#3A3A3F}
+.pending{color:var(--mut)}
+
+/* requisite rows */
+.row{display:flex;align-items:center;gap:10px;padding:14px 12px 14px 16px;border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+.row__txt{flex:1;min-width:0}
+.row__label{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--mut)}
+.bank{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:6px;font-size:11px;font-weight:600;color:#fff;flex:none}
+.bank--mono{background:#17171A}
+.bank--privat{background:#5BAA2E}
+.bank--ing{background:#FF6200}
+.bank--gopay{background:#00AED6}
+.bank--paypal{background:#003087}
+.row__val{font-weight:500;font-size:min(1.08rem,3.8vw);white-space:nowrap;letter-spacing:.01em;font-variant-numeric:tabular-nums;margin-top:2px;overflow-wrap:anywhere}
+.row__val--name{letter-spacing:-.01em;white-space:normal}
+
+.copy{
+  flex:none;display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  height:52px;padding:0 13px;border-radius:14px;border:0;cursor:pointer;
+  background:var(--ink);color:#fff;font-size:14px;font-weight:500;
+  transition:background .25s,transform .15s var(--ease);touch-action:manipulation;
+}
+.copy:active{transform:scale(.96)}
+.copy[disabled]{background:var(--line-2);color:#fff;cursor:default}
+.copy svg{flex:none}
+.copy.done{background:var(--ok)}
+.copy .i-ok{display:none}
+.copy.done .i-copy{display:none}
+.copy.done .i-ok{display:block}
+
+.hint{display:flex;gap:10px;align-items:flex-start;padding:14px 18px;background:var(--acc-soft);font-size:14px;line-height:1.5;color:#24484A;border-top:1px solid var(--line)}
+.hint svg{flex:none;margin-top:3px;color:var(--acc)}
+.hint b{font-weight:600;color:#17393B}
+
+/* after payment */
+.after{margin-top:28px;padding:22px 20px;background:#EDEDEA;border-radius:18px;text-align:center}
+.after p{color:var(--mut);font-size:15px;max-width:40ch;margin-inline:auto}
+.btn{margin-top:16px;display:inline-flex;gap:10px;align-items:center;justify-content:center;min-height:52px;padding:12px 26px;background:var(--ink);color:#fff;text-decoration:none;font-weight:500;font-size:15px;border-radius:99px}
+
+.foot{padding-block:28px 36px;font-size:13px;color:var(--mut);text-align:center}
+
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:var(--ink);color:#fff;padding:12px 18px;border-radius:99px;font-size:14px;font-weight:500;transition:opacity .25s,transform .25s var(--ease);z-index:10;white-space:nowrap}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media(max-width:360px){
+  .copy{min-width:0;width:52px;padding:0}
+  .copy .t{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<header class="top wrap">
+  <span class="brand"><img src="images/icon.svg" alt="" width="30" height="23"><span data-t="brand">Олександр</span></span>
+  <div class="lang" id="lang" role="group" aria-label="Мова / Language" data-lang="uk">
+    <button type="button" data-set-lang="uk" aria-pressed="true">UA</button>
+    <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="intro">
+    <div class="coin" aria-hidden="true">
+      <span class="coin__ring"></span>
+      <span class="coin__ring coin__ring--2"></span>
+      <span class="coin__face">
+        <span class="coin__roll"><span class="coin__track"><svg viewBox="0 0 24 24" width="32" height="32"><path d="M12 3v18M16.5 7.5c-.7-1.4-2.4-2.3-4.5-2.3-2.6 0-4.5 1.4-4.5 3.3 0 4.4 9 2.4 9 6.9 0 1.9-2 3.4-4.6 3.4-2.2 0-4-1-4.7-2.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><svg viewBox="0 0 24 24" width="32" height="32"><path d="M12 3v18M16.5 7.5c-.7-1.4-2.4-2.3-4.5-2.3-2.6 0-4.5 1.4-4.5 3.3 0 4.4 9 2.4 9 6.9 0 1.9-2 3.4-4.6 3.4-2.2 0-4-1-4.7-2.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
+      </span>
+    </div>
+    <div class="intro__txt">
+      <p class="eyebrow" data-t="eyebrow">Рахунок на оплату</p>
+      <h1 data-t="h1">Оплата робіт</h1>
+    </div>
+  </section>
+
+  <!-- amount -->
+  <section class="sec" aria-labelledby="t-sum">
+    <h2 class="sec__title" id="t-sum" data-t="sumTitle">Сума до оплати</h2>
+    <div class="panel">
+      <div id="items"></div>
+      <div class="amount">
+        <p class="amount__label" data-t="total">Разом до оплати</p>
+        <p class="amount__val" id="total-usd">—</p>
+        <p class="amount__calc" id="total-calc"></p>
+        <div class="fx" id="fx"></div>
+      </div>
+      <div class="hint">
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" fill="currentColor"/></svg>
+        <span id="rate-note"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- GoPay -->
+  <section class="sec" aria-labelledby="t-gopay">
+    <h2 class="sec__title" id="t-gopay">GoPay</h2>
+    <p class="sec__sub" data-t="gopaySub">Оплата в рупіях (IDR)</p>
+    <div class="panel">
+      <div class="row">
+        <div class="row__txt">
+          <p class="row__label"><span class="bank bank--gopay" aria-hidden="true">G</span><span data-t="gopayPhone">Номер телефону GoPay</span></p>
+          <p class="row__val" id="gopay-phone"></p>
+        </div>
+        <button class="copy" type="button" id="gopay-copy" data-copy="" data-aria="copyGopay"></button>
+      </div>
+      <div class="row">
+        <div class="row__txt">
+          <p class="row__label" data-t="sumIdr">Сума в рупіях</p>
+          <p class="row__val" id="idr-val">—</p>
+        </div>
+        <button class="copy" type="button" id="idr-copy" data-copy="" data-aria="copySum"></button>
+      </div>
+      <div class="hint">
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" fill="currentColor"/></svg>
+        <span data-t-html="gopayHint">Переказ на номер телефону в застосунку <b>GoPay або Gojek</b>.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PayPal -->
+  <section class="sec" aria-labelledby="t-paypal">
+    <h2 class="sec__title" id="t-paypal">PayPal</h2>
+    <p class="sec__sub" data-t="paypalSub">Оплата в доларах (USD)</p>
+    <div class="panel">
+      <div class="row">
+        <div class="row__txt">
+          <p class="row__label"><span class="bank bank--paypal" aria-hidden="true">P</span><span data-t="paypalEmail">Email PayPal</span></p>
+          <p class="row__val">alexandr.qdq@gmail.com</p>
+        </div>
+        <button class="copy" type="button" data-copy="alexandr.qdq@gmail.com" data-aria="copyEmail"></button>
+      </div>
+      <div class="row">
+        <div class="row__txt">
+          <p class="row__label" data-t="sumUsd">Сума в доларах</p>
+          <p class="row__val" id="usd-val">—</p>
+        </div>
+        <button class="copy" type="button" id="usd-copy" data-copy="" data-aria="copySum"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- UA cards -->
+  <section class="sec" aria-labelledby="t-ua">
+    <h2 class="sec__title" id="t-ua" data-t="uaTitle">Українські картки</h2>
+    <p class="sec__sub" data-t="uaSub">Оплата в гривнях</p>
+    <div class="panel">
+      <div class="row">
+        <div class="row__txt">
+          <p class="row__label"><span class="bank bank--mono" aria-hidden="true">m</span><span data-t="mono">Монобанк</span></p>
+          <p class="row__val">4441 1111 5946 5057</p>
+        </div>
+        <button class="copy" type="button" data-copy="4441111159465057" data-aria="copyCard"></button>
+      </div>
+      <div class="row">
+        <div class="row__txt">
+          <p class="row__label"><span class="bank bank--privat" aria-hidden="true">П</span><span data-t="privat">ПриватБанк</span></p>
+          <p class="row__val">5457 0825 0476 9733</p>
+        </div>
+        <button class="copy" type="button" data-copy="5457082504769733" data-aria="copyCard"></button>
+      </div>
+      <div class="row">
+        <div class="row__txt">
+          <p class="row__label" data-t="recipient">Отримувач</p>
+          <p class="row__val row__val--name" data-t="nameUa">Олександр Порохня</p>
+        </div>
+        <button class="copy" type="button" data-copy="Олександр Порохня" data-aria="copyName"></button>
+      </div>
+      <div class="row">
+        <div class="row__txt">
+          <p class="row__label" data-t="sumUah">Сума в гривнях</p>
+          <p class="row__val" id="uah-val">—</p>
+        </div>
+        <button class="copy" type="button" id="uah-copy" data-copy="" data-aria="copySum"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- EU account -->
+  <section class="sec" aria-labelledby="t-eu">
+    <h2 class="sec__title" id="t-eu" data-t="euTitle">Європейський рахунок</h2>
+    <p class="sec__sub" data-t="euSub">Оплата в євро, переказ SEPA</p>
+    <div class="panel">
+      <div class="row">
+        <div class="row__txt">
+          <p class="row__label" data-t="recipient">Отримувач</p>
+          <p class="row__val row__val--name">Oleksandr Porokhnia</p>
+        </div>
+        <button class="copy" type="button" data-copy="Oleksandr Porokhnia" data-aria="copyName"></button>
+      </div>
+      <div class="row">
+        <div class="row__txt">
+          <p class="row__label"><span class="bank bank--ing" aria-hidden="true">I</span>IBAN</p>
+          <p class="row__val">NL18 INGB 0116 5294 82</p>
+        </div>
+        <button class="copy" type="button" data-copy="NL18INGB0116529482" data-aria="copyIban"></button>
+      </div>
+      <div class="row">
+        <div class="row__txt">
+          <p class="row__label">BIC / SWIFT</p>
+          <p class="row__val">INGBNL2A</p>
+        </div>
+        <button class="copy" type="button" data-copy="INGBNL2A" data-aria="copyBic"></button>
+      </div>
+      <div class="row">
+        <div class="row__txt">
+          <p class="row__label" data-t="bank">Банк</p>
+          <p class="row__val row__val--name" data-t="bankName">ING Bank N.V., Нідерланди</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="row__txt">
+          <p class="row__label" data-t="sumEur">Сума в євро</p>
+          <p class="row__val" id="eur-val">—</p>
+        </div>
+        <button class="copy" type="button" id="eur-copy" data-copy="" data-aria="copySum"></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="after">
+    <p data-t="after">Після оплати, будь ласка, надішліть скріншот або квитанцію.</p>
+    <a class="btn" href="https://t.me/SashaAP24" target="_blank" rel="noopener noreferrer"><span data-t="send">Надіслати в Telegram</span> <span aria-hidden="true">↗</span></a>
+  </section>
+</main>
+
+<footer class="foot wrap" data-t="foot">Олександр · розробка сайтів</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ===================== ДАНІ РАХУНКУ — змінювати тут =====================
+   usd: сума позиції в доларах (null — ще не вказано, тоді «Разом» показує «—»).
+   paid: уже оплачено, $. Курси — НБУ на дату rateDate (IDR рахується через гривню). */
+var INVOICE = {
+  rateDate: '30.10.2026',
+  uahPerUsd: 45.5293,
+  uahPerEur: 50.6796,
+  uahPerIdr: 0.0025101,
+  gopayPhone: '',          // номер GoPay, напр. '+62 812 0000 0000'
+  paid: 0,
+  items: [
+    {
+      name: { uk: 'Доопрацювання сайту Aqua Dive', en: 'Aqua Dive website updates' },
+      list: {
+        uk: [
+          'Мапу дайв-сайтів розширено: Туламбен і Кубу, 5 нових місць',
+          'Нові блоки на сторінці Diving: Underwater Photography, Discover Scuba Dive, Fun Dives',
+          'Перемикач курсів PADI courses / Freedive waves',
+          'Відео з черепахою на стартовому екрані Diving і в галереї',
+          'Оновлене меню Diving у шапці та футері',
+          'Нове фото на сторінці Packages'
+        ],
+        en: [
+          'Dive-site map extended to Tulamben and Kubu, 5 new sites',
+          'New sections on the Diving page: Underwater Photography, Discover Scuba Dive, Fun Dives',
+          'PADI courses / Freedive waves switcher',
+          'Turtle video on the Diving hero and in the gallery',
+          'Updated Diving menu in the header and footer',
+          'New photo on the Packages page'
+        ]
+      },
+      usd: null
+    }
+  ]
+};
+/* ======================================================================== */
+
+var T = {
+  uk: {
+    title: 'Оплата робіт | Олександр', brand: 'Олександр', eyebrow: 'Рахунок на оплату', h1: 'Оплата робіт',
+    sumTitle: 'Сума до оплати', total: 'Разом до оплати', paidLbl: 'оплачено', pendingSum: 'суму буде вказано',
+    rateNote: 'Сума в рупіях, гривнях і євро — за курсом НБУ станом на {d}.',
+    gopaySub: 'Оплата в рупіях (IDR)', gopayPhone: 'Номер телефону GoPay', gopayPending: 'буде додано',
+    sumIdr: 'Сума в рупіях', gopayHint: 'Переказ на номер телефону в застосунку <b>GoPay або Gojek</b>.',
+    paypalSub: 'Оплата в доларах (USD)', paypalEmail: 'Email PayPal', sumUsd: 'Сума в доларах',
+    uaTitle: 'Українські картки', uaSub: 'Оплата в гривнях', mono: 'Монобанк', privat: 'ПриватБанк',
+    recipient: 'Отримувач', nameUa: 'Олександр Порохня', sumUah: 'Сума в гривнях',
+    euTitle: 'Європейський рахунок', euSub: 'Оплата в євро, переказ SEPA', bank: 'Банк', bankName: 'ING Bank N.V., Нідерланди', sumEur: 'Сума в євро',
+    after: 'Після оплати, будь ласка, надішліть скріншот або квитанцію.', send: 'Надіслати в Telegram',
+    foot: 'Олександр · розробка сайтів',
+    copy: 'Копіювати', done: 'Готово', copied: 'Скопійовано', failed: 'Не вдалося, скопіюйте вручну',
+    copyCard: 'Скопіювати номер картки', copyName: 'Скопіювати імʼя отримувача', copySum: 'Скопіювати суму',
+    copyIban: 'Скопіювати IBAN', copyBic: 'Скопіювати BIC', copyEmail: 'Скопіювати email', copyGopay: 'Скопіювати номер GoPay'
+  },
+  en: {
+    title: 'Payment | Oleksandr', brand: 'Oleksandr', eyebrow: 'Invoice', h1: 'Payment for work',
+    sumTitle: 'Amount due', total: 'Total due', paidLbl: 'paid', pendingSum: 'amount to be added',
+    rateNote: 'Amounts in rupiah, hryvnia and euro use the National Bank of Ukraine rate as of {d}.',
+    gopaySub: 'Payment in rupiah (IDR)', gopayPhone: 'GoPay phone number', gopayPending: 'will be added',
+    sumIdr: 'Amount in rupiah', gopayHint: 'Transfer to the phone number in the <b>GoPay or Gojek</b> app.',
+    paypalSub: 'Payment in US dollars (USD)', paypalEmail: 'PayPal email', sumUsd: 'Amount in dollars',
+    uaTitle: 'Ukrainian cards', uaSub: 'Payment in hryvnia (UAH)', mono: 'Monobank', privat: 'PrivatBank',
+    recipient: 'Recipient', nameUa: 'Олександр Порохня', sumUah: 'Amount in hryvnia',
+    euTitle: 'European account', euSub: 'Payment in euro, SEPA transfer', bank: 'Bank', bankName: 'ING Bank N.V., Netherlands', sumEur: 'Amount in euro',
+    after: 'After paying, please send a screenshot or receipt.', send: 'Send via Telegram',
+    foot: 'Oleksandr · web development',
+    copy: 'Copy', done: 'Done', copied: 'Copied', failed: 'Could not copy, please copy manually',
+    copyCard: 'Copy card number', copyName: 'Copy recipient name', copySum: 'Copy amount',
+    copyIban: 'Copy IBAN', copyBic: 'Copy BIC', copyEmail: 'Copy email', copyGopay: 'Copy GoPay number'
+  }
+};
+
+(function () {
+  'use strict';
+  var lang = 'uk';
+  var NB = ' ';
+  var ICON_COPY = '<svg class="i-copy" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M9 9h10a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1zm-4 6H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var ICON_OK = '<svg class="i-ok" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var CHECK = '<svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var $ = function (id) { return document.getElementById(id); };
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  function group(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, NB); }
+  function usdTxt(n) { return group(Math.round(n * 100) / 100) + NB + '$'; }
+
+  // ---- суми
+  var known = INVOICE.items.every(function (it) { return typeof it.usd === 'number'; });
+  var sum = INVOICE.items.reduce(function (a, it) { return a + (it.usd || 0); }, 0);
+  var due = sum - (INVOICE.paid || 0);
+  var uah = Math.round(due * INVOICE.uahPerUsd);
+  var eur = Math.round(due * INVOICE.uahPerUsd / INVOICE.uahPerEur);
+  var idr = Math.round(due * INVOICE.uahPerUsd / INVOICE.uahPerIdr / 1000) * 1000;   // до тисяч
+
+  function setAmount(valId, copyId, text, raw) {
+    $(valId).textContent = known ? text : '—';
+    var b = $(copyId);
+    b.setAttribute('data-copy', known ? String(raw) : '');
+    b.disabled = !known;
+  }
+
+  function render() {
+    var t = T[lang];
+    document.documentElement.lang = lang === 'uk' ? 'uk' : 'en';
+    document.title = t.title;
+    document.querySelectorAll('[data-t]').forEach(function (el) { var k = el.getAttribute('data-t'); if (t[k] != null) el.textContent = t[k]; });
+    document.querySelectorAll('[data-t-html]').forEach(function (el) { var k = el.getAttribute('data-t-html'); if (t[k] != null) el.innerHTML = t[k]; });
+
+    // позиції
+    $('items').innerHTML = INVOICE.items.map(function (it) {
+      var list = (it.list && it.list[lang]) || [];
+      return '<div class="item"><div class="item__txt"><p class="item__name">' + esc(it.name[lang]) + '</p>' +
+        (it.desc ? '<p class="item__desc">' + esc(it.desc[lang]) + '</p>' : '') +
+        (list.length ? '<ul class="item__list">' + list.map(function (li) { return '<li>' + esc(li) + '</li>'; }).join('') + '</ul>' : '') +
+        (it.paid ? '<span class="paid">' + CHECK + usdTxt(it.paid) + ' ' + t.paidLbl + '</span>' : '') +
+        '</div><p class="item__sum' + (typeof it.usd === 'number' ? '' : ' pending') + '">' + (typeof it.usd === 'number' ? usdTxt(it.usd) : '—') + '</p></div>';
+    }).join('');
+
+    // разом
+    $('total-usd').textContent = known ? usdTxt(due) : '—';
+    var calc = '';
+    if (known && (INVOICE.items.length > 1 || INVOICE.paid)) {
+      calc = INVOICE.items.map(function (it) { return usdTxt(it.usd); }).join(' + ') + (INVOICE.paid ? ' − ' + usdTxt(INVOICE.paid) + ' ' + t.paidLbl : '');
+    } else if (!known) calc = t.pendingSum;
+    $('total-calc').textContent = calc;
+    $('fx').innerHTML = known ? ['≈ Rp' + NB + group(idr), '≈ ' + group(uah) + NB + 'грн', '≈ ' + group(eur) + NB + '€']
+      .map(function (s) { return '<span class="fx__item">' + s + '</span>'; }).join('') : '';
+    $('rate-note').textContent = t.rateNote.replace('{d}', INVOICE.rateDate);
+
+    setAmount('usd-val', 'usd-copy', usdTxt(due), Math.round(due * 100) / 100);
+    setAmount('uah-val', 'uah-copy', group(uah) + NB + 'грн', uah);
+    setAmount('eur-val', 'eur-copy', group(eur) + NB + '€', eur);
+    setAmount('idr-val', 'idr-copy', 'Rp' + NB + group(idr), idr);
+
+    var ph = INVOICE.gopayPhone;
+    $('gopay-phone').textContent = ph || t.gopayPending;
+    $('gopay-phone').classList.toggle('pending', !ph);
+    $('gopay-copy').setAttribute('data-copy', ph.replace(/\s/g, ''));
+    $('gopay-copy').disabled = !ph;
+
+    document.querySelectorAll('.copy').forEach(function (b) {
+      var k = b.getAttribute('data-aria'); if (k) b.setAttribute('aria-label', t[k]);
+      var l = b.querySelector('.t'); if (l && !b.classList.contains('done')) l.textContent = t.copy;
+    });
+    var sw = $('lang');
+    sw.setAttribute('data-lang', lang);
+    sw.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-set-lang') === lang ? 'true' : 'false'); });
+  }
+
+  // ---- мова: ?lang=en → збережений вибір → українська
+  try {
+    var q = new URLSearchParams(location.search).get('lang');
+    var saved = null; try { saved = localStorage.getItem('pay-lang'); } catch (e) {}
+    lang = q === 'en' || q === 'uk' ? q : (saved === 'en' || saved === 'uk' ? saved : 'uk');   // за замовчуванням українська
+  } catch (e) { lang = 'uk'; }
+
+  $('lang').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-set-lang]'); if (!b) return;
+    lang = b.getAttribute('data-set-lang');
+    try { localStorage.setItem('pay-lang', lang); } catch (err) {}
+    render();
+  });
+
+  // ---- копіювання
+  var toast = $('toast'), toastTimer;
+  function fallbackCopy(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed'; ta.style.top = '-1000px'; ta.style.fontSize = '16px';
+    document.body.appendChild(ta);
+    var range = document.createRange(); range.selectNodeContents(ta);
+    var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
+    ta.setSelectionRange(0, text.length);
+    var ok = false; try { ok = document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta); sel.removeAllRanges();
+    return ok;
+  }
+  function copy(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      return navigator.clipboard.writeText(text).then(function () { return true; }, function () { return fallbackCopy(text); });
+    }
+    return Promise.resolve(fallbackCopy(text));
+  }
+  function showToast(msg) {
+    toast.textContent = msg; toast.classList.add('show');
+    clearTimeout(toastTimer); toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 1600);
+  }
+  document.querySelectorAll('.copy').forEach(function (btn) {
+    btn.innerHTML = ICON_COPY + ICON_OK + '<span class="t"></span>';
+    var timer;
+    btn.addEventListener('click', function () {
+      var text = btn.getAttribute('data-copy'); if (!text) return;
+      copy(text).then(function (ok) {
+        if (!ok) { showToast(T[lang].failed); return; }
+        btn.classList.add('done'); btn.querySelector('.t').textContent = T[lang].done;
+        showToast(T[lang].copied);
+        clearTimeout(timer);
+        timer = setTimeout(function () { btn.classList.remove('done'); btn.querySelector('.t').textContent = T[lang].copy; }, 1800);
+      });
+    });
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
