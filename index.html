@@ -307,7 +307,7 @@ h1{font-weight:600;font-size:clamp(2rem,8vw,2.6rem);line-height:1.05;letter-spac
 
   <section class="after">
     <p data-t="after">Після оплати, будь ласка, надішліть скріншот або квитанцію.</p>
-    <a class="btn" href="https://t.me/SashaAP24" target="_blank" rel="noopener noreferrer"><span data-t="send">Надіслати в Telegram</span> <span aria-hidden="true">↗</span></a>
+    <a class="btn" id="wa-btn" href="https://wa.me/31612208382" target="_blank" rel="noopener noreferrer"><span data-t="send">Надіслати у WhatsApp</span> <span aria-hidden="true">↗</span></a>
   </section>
 </main>
 
@@ -364,7 +364,7 @@ var T = {
     uaTitle: 'Українські картки', uaSub: 'Оплата в гривнях', mono: 'Монобанк', privat: 'ПриватБанк',
     recipient: 'Отримувач', nameUa: 'Олександр Порохня', sumUah: 'Сума в гривнях',
     euTitle: 'Європейський рахунок', euSub: 'Оплата в євро, переказ SEPA', bank: 'Банк', bankName: 'ING Bank N.V., Нідерланди', sumEur: 'Сума в євро',
-    after: 'Після оплати, будь ласка, надішліть скріншот або квитанцію.', send: 'Надіслати в Telegram',
+    after: 'Після оплати, будь ласка, надішліть скріншот або квитанцію.', send: 'Надіслати у WhatsApp', waMsg: 'Добрий день! Надсилаю підтвердження оплати.',
     foot: 'Олександр · розробка сайтів',
     copy: 'Копіювати', done: 'Готово', copied: 'Скопійовано', failed: 'Не вдалося, скопіюйте вручну',
     copyCard: 'Скопіювати номер картки', copyName: 'Скопіювати імʼя отримувача', copySum: 'Скопіювати суму',
@@ -380,7 +380,7 @@ var T = {
     uaTitle: 'Ukrainian cards', uaSub: 'Payment in hryvnia (UAH)', mono: 'Monobank', privat: 'PrivatBank',
     recipient: 'Recipient', nameUa: 'Олександр Порохня', sumUah: 'Amount in hryvnia',
     euTitle: 'European account', euSub: 'Payment in euro, SEPA transfer', bank: 'Bank', bankName: 'ING Bank N.V., Netherlands', sumEur: 'Amount in euro',
-    after: 'After paying, please send a screenshot or receipt.', send: 'Send via Telegram',
+    after: 'After paying, please send a screenshot or receipt.', send: 'Send via WhatsApp', waMsg: 'Hello! Here is the payment confirmation.',
     foot: 'Oleksandr · web development',
     copy: 'Copy', done: 'Done', copied: 'Copied', failed: 'Could not copy, please copy manually',
     copyCard: 'Copy card number', copyName: 'Copy recipient name', copySum: 'Copy amount',
@@ -458,6 +458,7 @@ var T = {
       var k = b.getAttribute('data-aria'); if (k) b.setAttribute('aria-label', t[k]);
       var l = b.querySelector('.t'); if (l && !b.classList.contains('done')) l.textContent = t.copy;
     });
+    $('wa-btn').href = 'https://wa.me/31612208382?text=' + encodeURIComponent(t.waMsg);
     var sw = $('lang');
     sw.setAttribute('data-lang', lang);
     sw.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-set-lang') === lang ? 'true' : 'false'); });
