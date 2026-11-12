@@ -83,6 +83,10 @@ h1{font-weight:600;font-size:clamp(2rem,8vw,2.6rem);line-height:1.05;letter-spac
 .item__list li::before{content:"";position:absolute;left:0;top:.65em;width:6px;height:1px;background:var(--acc)}
 .item__sum{flex:none;font-weight:600;font-size:1.15rem;font-variant-numeric:tabular-nums;white-space:nowrap}
 .paid{display:inline-flex;align-items:center;gap:5px;height:26px;margin-top:12px;padding:0 10px;border-radius:99px;background:#E3F4EA;color:#1F7A45;border:1px solid rgba(31,138,76,.25);font-size:13px;font-weight:500;white-space:nowrap}
+.all-paid .amount{background:#EEF8F1}
+.all-paid .amount__val{font-size:2.4rem;color:#1F7A45;letter-spacing:-.03em}
+.all-paid #t-sum + .panel .hint{display:none}
+.paid--row{margin-top:0}
 .fx{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
 .fx__item{display:inline-flex;align-items:center;height:32px;padding:0 12px;border-radius:99px;background:var(--bg);border:1px solid var(--line);font-size:15px;font-weight:500;font-variant-numeric:tabular-nums;color:#3A3A3F}
 .pending{color:var(--mut)}
@@ -339,7 +343,7 @@ var INVOICE = {
   uahPerEur: 50.6796,
   uahPerIdr: 0.0025101,
   gopayPhone: '+380 68 601 0169',   // номер GoPay
-  paid: 0,
+  paid: 60,                        // 12.11: обидва рахунки сплачено
   items: [
     {
       name: { uk: 'Доопрацювання сайту Aqua Dive', en: 'Aqua Dive website updates' },
@@ -359,7 +363,8 @@ var INVOICE = {
           'Updated Diving menu in the header and footer'
         ]
       },
-      usd: 35
+      usd: 35,
+      paid: 35
     },
     {
       name: { uk: 'Окремі сторінки Scuba diving і Freediving', en: 'Separate Scuba diving and Freediving pages' },
@@ -379,7 +384,8 @@ var INVOICE = {
           'Separate label for freediving requests, SEO for the new page'
         ]
       },
-      usd: 25
+      usd: 25,
+      paid: 25
     }
   ]
 };
@@ -388,7 +394,7 @@ var INVOICE = {
 var T = {
   uk: {
     title: 'Оплата робіт | Олександр', brand: 'Олександр', eyebrow: 'Рахунок на оплату', h1: 'Оплата робіт',
-    sumTitle: 'Сума до оплати', total: 'Разом до оплати', paidLbl: 'оплачено', pendingSum: 'суму буде вказано',
+    sumTitle: 'Сума до оплати', total: 'Разом до оплати', paidLbl: 'оплачено', sumTitlePaid: 'Рахунок', totalPaid: 'Статус оплати', allPaid: 'Усе оплачено 🎉', allPaidCalc: '{s} сплачено повністю. Дякую!', rowPaid: 'оплачено', pendingSum: 'суму буде вказано',
     rateNote: 'Сума в рупіях, гривнях і євро — за курсом НБУ станом на {d}.',
     gopaySub: 'Оплата в рупіях (IDR)', gopayPhone: 'Номер телефону GoPay', gopayPending: 'буде додано',
     sumIdr: 'Сума в рупіях', gopayHint: 'Переказ на цей номер у застосунку <b>GoPay</b> або через GoPay у застосунку <b>Gojek</b> — це той самий гаманець.',
@@ -396,7 +402,7 @@ var T = {
     uaTitle: 'Українські картки', uaSub: 'Оплата в гривнях', mono: 'Монобанк', privat: 'ПриватБанк',
     recipient: 'Отримувач', nameUa: 'Олександр Порохня', sumUah: 'Сума в гривнях',
     euTitle: 'Європейський рахунок', euSub: 'Оплата в євро, переказ SEPA', bank: 'Банк', bankName: 'ING Bank N.V., Нідерланди', sumEur: 'Сума в євро',
-    after: 'Після оплати, будь ласка, надішліть скріншот або квитанцію.', send: 'Надіслати у WhatsApp', waMsg: 'Добрий день! Надсилаю підтвердження оплати.',
+    after: 'Після оплати, будь ласка, надішліть скріншот або квитанцію.', afterPaid: 'Оплату отримано. Дякую за співпрацю! 🙌', send: 'Надіслати у WhatsApp', waMsg: 'Добрий день! Надсилаю підтвердження оплати.',
     foot: 'Олександр · розробка сайтів',
     copy: 'Копіювати', done: 'Готово', copied: 'Скопійовано', failed: 'Не вдалося, скопіюйте вручну',
     copyCard: 'Скопіювати номер картки', copyName: 'Скопіювати імʼя отримувача', copySum: 'Скопіювати суму',
@@ -404,7 +410,7 @@ var T = {
   },
   en: {
     title: 'Payment | Oleksandr', brand: 'Oleksandr', eyebrow: 'Invoice', h1: 'Payment for work',
-    sumTitle: 'Amount due', total: 'Total due', paidLbl: 'paid', pendingSum: 'amount to be added',
+    sumTitle: 'Amount due', total: 'Total due', paidLbl: 'paid', sumTitlePaid: 'Invoice', totalPaid: 'Payment status', allPaid: 'All paid 🎉', allPaidCalc: '{s} paid in full. Thank you!', rowPaid: 'paid', pendingSum: 'amount to be added',
     rateNote: 'Amounts in rupiah, hryvnia and euro use the National Bank of Ukraine rate as of {d}.',
     gopaySub: 'Payment in rupiah (IDR)', gopayPhone: 'GoPay phone number', gopayPending: 'will be added',
     sumIdr: 'Amount in rupiah', gopayHint: 'Transfer to this number in the <b>GoPay</b> app, or via GoPay inside the <b>Gojek</b> app — it is the same wallet.',
@@ -412,7 +418,7 @@ var T = {
     uaTitle: 'Ukrainian cards', uaSub: 'Payment in hryvnia (UAH)', mono: 'Monobank', privat: 'PrivatBank',
     recipient: 'Recipient', nameUa: 'Олександр Порохня', sumUah: 'Amount in hryvnia',
     euTitle: 'European account', euSub: 'Payment in euro, SEPA transfer', bank: 'Bank', bankName: 'ING Bank N.V., Netherlands', sumEur: 'Amount in euro',
-    after: 'After paying, please send a screenshot or receipt.', send: 'Send via WhatsApp', waMsg: 'Hello! Here is the payment confirmation.',
+    after: 'After paying, please send a screenshot or receipt.', afterPaid: 'Payment received. Thank you for working together! 🙌', send: 'Send via WhatsApp', waMsg: 'Hello! Here is the payment confirmation.',
     foot: 'Oleksandr · web development',
     copy: 'Copy', done: 'Done', copied: 'Copied', failed: 'Could not copy, please copy manually',
     copyCard: 'Copy card number', copyName: 'Copy recipient name', copySum: 'Copy amount',
@@ -475,10 +481,28 @@ var T = {
       .map(function (s) { return '<span class="fx__item">' + s + '</span>'; }).join('') : '';
     $('rate-note').textContent = t.rateNote.replace('{d}', INVOICE.rateDate);
 
-    setAmount('usd-val', 'usd-copy', usdTxt(due), Math.round(due * 100) / 100);
-    setAmount('uah-val', 'uah-copy', group(uah) + NB + 'грн', uah);
-    setAmount('eur-val', 'eur-copy', group(eur) + NB + '€', eur);
-    setAmount('idr-val', 'idr-copy', 'Rp' + NB + group(idr), idr);
+    // 12.11: усе сплачено — замість суми статус, реквізити лишаються
+    var allPaid = known && due <= 0;
+    document.body.classList.toggle('all-paid', allPaid);
+    if (allPaid) {
+      $('t-sum').textContent = t.sumTitlePaid;
+      document.querySelector('.amount__label').textContent = t.totalPaid;
+      $('total-usd').textContent = t.allPaid;
+      $('total-calc').textContent = t.allPaidCalc.replace('{s}', usdTxt(sum));
+      $('fx').innerHTML = '';
+    }
+
+    if (allPaid) {
+      ['usd', 'uah', 'eur', 'idr'].forEach(function (k) {
+        $(k + '-val').innerHTML = '<span class="paid paid--row">' + CHECK + esc(t.rowPaid) + '</span>';
+        $(k + '-copy').style.display = 'none';
+      });
+    } else {
+      setAmount('usd-val', 'usd-copy', usdTxt(due), Math.round(due * 100) / 100);
+      setAmount('uah-val', 'uah-copy', group(uah) + NB + 'грн', uah);
+      setAmount('eur-val', 'eur-copy', group(eur) + NB + '€', eur);
+      setAmount('idr-val', 'idr-copy', 'Rp' + NB + group(idr), idr);
+    }
 
     var ph = INVOICE.gopayPhone;
     $('gopay-phone').textContent = ph || t.gopayPending;
@@ -491,6 +515,7 @@ var T = {
       var l = b.querySelector('.t'); if (l && !b.classList.contains('done')) l.textContent = t.copy;
     });
     $('wa-btn').href = 'https://wa.me/31612208382?text=' + encodeURIComponent(t.waMsg);
+    if (allPaid) { document.querySelector('.after [data-t="after"]').textContent = t.afterPaid; $('wa-btn').style.display = 'none'; }
     var sw = $('lang');
     sw.setAttribute('data-lang', lang);
     sw.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-set-lang') === lang ? 'true' : 'false'); });
