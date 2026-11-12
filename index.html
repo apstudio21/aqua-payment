@@ -85,7 +85,8 @@ h1{font-weight:600;font-size:clamp(2rem,8vw,2.6rem);line-height:1.05;letter-spac
 .paid{display:inline-flex;align-items:center;gap:5px;height:26px;margin-top:12px;padding:0 10px;border-radius:99px;background:#E3F4EA;color:#1F7A45;border:1px solid rgba(31,138,76,.25);font-size:13px;font-weight:500;white-space:nowrap}
 .all-paid .amount{background:#EEF8F1}
 .all-paid .amount__val{font-size:2.4rem;color:#1F7A45;letter-spacing:-.03em}
-.all-paid #t-sum + .panel .hint{display:none}
+.all-paid #t-sum + .panel .hint,.all-paid #items{display:none}
+.all-paid .amount{border-top:0}
 .paid--row{margin-top:0}
 .fx{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
 .fx__item{display:inline-flex;align-items:center;height:32px;padding:0 12px;border-radius:99px;background:var(--bg);border:1px solid var(--line);font-size:15px;font-weight:500;font-variant-numeric:tabular-nums;color:#3A3A3F}
@@ -394,7 +395,7 @@ var INVOICE = {
 var T = {
   uk: {
     title: 'Оплата робіт | Олександр', brand: 'Олександр', eyebrow: 'Рахунок на оплату', h1: 'Оплата робіт',
-    sumTitle: 'Сума до оплати', total: 'Разом до оплати', paidLbl: 'оплачено', sumTitlePaid: 'Рахунок', totalPaid: 'Статус оплати', allPaid: 'Усе оплачено 🎉', allPaidCalc: '{s} сплачено повністю. Дякую!', rowPaid: 'оплачено', pendingSum: 'суму буде вказано',
+    sumTitle: 'Сума до оплати', total: 'Разом до оплати', paidLbl: 'оплачено', sumTitlePaid: 'Рахунок', totalPaid: 'Статус оплати', allPaid: 'Усе оплачено 🎉', allPaidCalc: 'Сплачено повністю. Дякую!', rowPaid: 'оплачено', pendingSum: 'суму буде вказано',
     rateNote: 'Сума в рупіях, гривнях і євро — за курсом НБУ станом на {d}.',
     gopaySub: 'Оплата в рупіях (IDR)', gopayPhone: 'Номер телефону GoPay', gopayPending: 'буде додано',
     sumIdr: 'Сума в рупіях', gopayHint: 'Переказ на цей номер у застосунку <b>GoPay</b> або через GoPay у застосунку <b>Gojek</b> — це той самий гаманець.',
@@ -410,7 +411,7 @@ var T = {
   },
   en: {
     title: 'Payment | Oleksandr', brand: 'Oleksandr', eyebrow: 'Invoice', h1: 'Payment for work',
-    sumTitle: 'Amount due', total: 'Total due', paidLbl: 'paid', sumTitlePaid: 'Invoice', totalPaid: 'Payment status', allPaid: 'All paid 🎉', allPaidCalc: '{s} paid in full. Thank you!', rowPaid: 'paid', pendingSum: 'amount to be added',
+    sumTitle: 'Amount due', total: 'Total due', paidLbl: 'paid', sumTitlePaid: 'Invoice', totalPaid: 'Payment status', allPaid: 'All paid 🎉', allPaidCalc: 'Paid in full. Thank you!', rowPaid: 'paid', pendingSum: 'amount to be added',
     rateNote: 'Amounts in rupiah, hryvnia and euro use the National Bank of Ukraine rate as of {d}.',
     gopaySub: 'Payment in rupiah (IDR)', gopayPhone: 'GoPay phone number', gopayPending: 'will be added',
     sumIdr: 'Amount in rupiah', gopayHint: 'Transfer to this number in the <b>GoPay</b> app, or via GoPay inside the <b>Gojek</b> app — it is the same wallet.',
